@@ -6,15 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    protected $fillable = ['title', 'author_id'];
+    protected $fillable = [
+        'title',
+        'year',
+        'author_id',
+    ];
 
     public function author()
     {
         return $this->belongsTo(Author::class);
     }
 
-    public function categories()
+    public function toString(): string
     {
-        return $this->belongsToMany(Category::class);
+        return $this->title . " by " .
+               $this->author->name . " (" .
+               $this->year . ")";
     }
 }
