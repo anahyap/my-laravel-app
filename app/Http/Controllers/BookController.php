@@ -6,10 +6,19 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
-    public function index()
+    public function show()
     {
-        $books = Book::with(['author', 'categories'])->get();
+        $books = Book::with('author')->get();
 
         return view('items', compact('books'));
+    }
+
+    public function showById($id)
+    {
+        $book = Book::with('author')->findOrFail($id);
+
+        return $book->title . " by " .
+               $book->author->name . " (" .
+               $book->year . ")";
     }
 }

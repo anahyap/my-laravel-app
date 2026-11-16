@@ -67,31 +67,25 @@
             <tr>
                 <th>Book Title</th>
                 <th>Author</th>
-                <th>Categories</th>
+                <th>Publication Year</th>
             </tr>
         </thead>
 
         <tbody>
-            @forelse ($books as $book)
-                <tr>
-                    <td>{{ $book->title }}</td>
-
-                    <td>
-                        {{ $book->author->name }}
-                    </td>
-
-                    <td>
-                        {{ $book->categories->pluck('name')->join(', ') }}
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="3" class="empty">
-                        No books found.
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
+    @forelse ($books as $book)
+        <tr>
+            <td>{{ $book->title }}</td>
+            <td>{{ $book->author->name }}</td>
+            <td>{{ $book->year }}</td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="3" class="empty">
+                No books available.
+            </td>
+        </tr>
+    @endforelse
+</tbody>
     </table>
 
 </div>
